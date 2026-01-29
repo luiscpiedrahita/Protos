@@ -1,0 +1,60 @@
+# Ignore everything in the root except the "wp-content" directory.
+# /*
+!.gitignore
+/node_modules
+/vendor
+/public/*
+!/public/.gitkeep
+.env
+npm-debug.log
+
+# ignore node dependency directories
+node_modules/*
+.sass-cache/*
+testing/
+
+# ignore log files, databases and dev files
+*.log
+*.sql
+*.sqlite
+*.DS_Store
+
+/stats/*
+.DS_Store (OSX Filesystem)
+
+
+# ignore compiled files
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# ignore packaged files
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+#ignore photoshop files
+*.psd
+
+# ignore Editor files
+.idea (For PHPStorm etc.)
+*.sublime-project
+*.sublime-workspace
+*.komodoproject
+/nbproject/*
+
+# track these files, if they exist
+!.gitignore
+!.editorconfig
+!.phpcs.xml.dist
+!README.md
+!CHANGELOG.md
+!composer.json

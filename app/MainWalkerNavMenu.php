@@ -4,15 +4,6 @@ namespace App;
 
 use Walker_Nav_Menu;
 
-// class My_Walker_Nav_Menu extends Walker_Nav_Menu
-// {
-//     public function start_lvl(&$output, $depth = 0, $args = [])
-//     {
-//         $indent = str_repeat("\t", $depth);
-//         $output .= "\n$indent<ul class=\"dropdown\">\n";
-//     }
-// }
-
 /**
  * Custom walker class.
  */

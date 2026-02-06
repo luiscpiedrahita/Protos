@@ -15,20 +15,6 @@ add_filter('excerpt_more', function () {
     return sprintf(' &hellip; <a href="%s">%s</a>', get_permalink(), __('Continued', 'sage'));
 });
 
-/** Branding **/
-add_action('wp_head', function () {
-    if ((is_home() || is_front_page()) && is_page()) {
-        echo '
-<!--
-Design + Development by                                   
-LMSEO © '.date('Y').'                     
-All Rights Reserved.               
-www.lmseo.com
-
--->';
-    }
-});
-
 /*
  * Add custom primary nav
  */
@@ -63,3 +49,39 @@ add_filter('wp_nav_menu_objects',
 
         return $items;
     });
+
+/**
+ * Adds a css class like 'widget-1', 'widget-2', etc.
+ *
+ * @param  array  $items  The menu items, sorted by each menu item's menu order.
+ * @return array (maybe) modified parameters passed to a widget’s display callback..
+ */
+add_filter('dynamic_sidebar_params', function ($params) {
+    global $my_widget_num; // Global counter for widgets
+    $widget_id = $params[0]['widget_id'];
+
+    if (! $my_widget_num) {
+        $my_widget_num = 0;
+    } // start widget counter
+    $my_widget_num++; // add 1 to the counter on each widget
+
+    // Add a class like 'widget-1', 'widget-2', etc.
+    $class_to_add = 'footer-widgets-'.$my_widget_num;
+
+    $haystack = $params[0]['before_widget'];
+    $needle = 'class="';
+    $replace = 'class="'.$class_to_add.' ';
+    $pos = strpos($haystack, $needle);
+
+    if ($pos !== false) {
+        $params[0]['before_widget'] = substr_replace($haystack, $replace, $pos, strlen($needle));
+    }
+
+    return $params;
+});
+
+add_filter('get_search_form', __NAMESPACE__.'\\custom_search_form', 40, 2);
+function custom_search_form($form, $args)
+{
+    return \Roots\view('partials.searchform');
+}

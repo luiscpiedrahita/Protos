@@ -40,7 +40,7 @@
                     </h4>
                     <hr />
                     <p data-equalizer-watch>
-                      {{ get_the_content($post) }}
+                      {{ wp_trim_words(apply_filters('the_content', $post->post_content), 100, '') }}
                       […]
                     </p>
                     <p class="entry-meta">
@@ -70,7 +70,6 @@
                         {{ get_the_date() }}
                       </time>
                       @if (is_admin_bar_showing())
-                        {
                         <a
                           class="post-edit-link"
                           href="{{ get_edit_post_link() }}"
